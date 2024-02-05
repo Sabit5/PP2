@@ -1,0 +1,104 @@
+movies = [
+    {"name": "Usual Suspects", "imdb": 7.0, "category": "Thriller"},
+    {"name": "Hitman", "imdb": 6.3, "category": "Action"},
+    {"name": "Dark Knight", "imdb": 9.0, "category": "Adventure"},
+    {"name": "The Help", "imdb": 8.0, "category": "Drama"},
+    {"name": "The Choice", "imdb": 6.2, "category": "Romance"},
+    {"name": "Colonia", "imdb": 7.4, "category": "Romance"},
+    {"name": "Love", "imdb": 6.0, "category": "Romance"},
+    {"name": "Bride Wars", "imdb": 5.4, "category": "Romance"},
+    {"name": "AlphaJet", "imdb": 3.2, "category": "War"},
+    {"name": "Ringing Crime", "imdb": 4.0, "category": "Crime"},
+    {"name": "Joking muck", "imdb": 7.2, "category": "Comedy"},
+    {"name": "What is the name", "imdb": 9.2, "category": "Suspense"},
+    {"name": "Detective", "imdb": 7.0, "category": "Suspense"},
+    {"name": "Exam", "imdb": 4.2, "category": "Thriller"},
+    {"name": "We Two", "imdb": 7.2, "category": "Romance"}
+]
+
+# Write a function that takes a single movie and returns True 
+# if its IMDB score is above 5.5
+def above_5_5(movies, movie_name):
+    for movie in movies:
+        if movie["name"] == movie_name:
+            return movie["imdb"] > 5.5
+
+# Write a function that returns a sublist of movies
+# with an IMDB score above 5.5.
+def filter_above_5_5(movies):
+    for movie in movies:
+        if above_5_5(movie):
+            print(f"Name: {movie['name']}")
+            print(f"IMDB: {movie['imdb']}, Category: {movie['category']}\n")
+
+# Write a function that takes a category name 
+# and returns just those movies under that category.
+def filter_by_category(movies, category):
+    for movie in movies:
+        if movie["category"] == category:
+            print(f"Name: {movie['name']}, IMDB: {movie['imdb']}\n")
+
+
+# Write a function that takes a list of movies 
+# and computes the average IMDB score.
+def average_imdb(list_movies):
+    list_movies = [int(num) for num in list_movies]
+    for movie in list_movies:
+        if movie not in movies:
+            pass
+        elif movie in movies:
+            sum+=movie['imdb']
+    return sum
+
+# Write a function that takes a category 
+# and computes the average IMDB score.
+def average_imdb_by_category(movies, category):
+    category_movies = filter_by_category(movies, category)
+    return average_imdb(category_movies)
+
+# Main function
+def main():
+    print("\n")
+    for movie in movies:
+        print(f"Name: {movie['name']}")
+        print(f"IMDB: {movie['imdb']}, Category: {movie['category']}\n")
+        
+
+    while True:
+        print("\nMenu:")
+        print("1) Check if the movie's IMDB score is above 5.5")
+        print("2) Filter movies with IMDB score above 5.5")
+        print("3) Filter movies by category")
+        print("4) Calculate average IMDB score of all movies")
+        print("5) Calculate average IMDB score of the category")
+        print("6) Exit")
+        choice = input("Enter your choice (1-6): ")
+        if choice == '1':
+            movie_name = input("Enter movie name: ")
+            print(above_5_5(movies, movie_name))
+            input()
+        elif choice == '2':
+            print(filter_above_5_5(movies))
+            input()
+        elif choice == '3':
+            category = input("Enter category to filter movies: ")
+            print(filter_by_category(movies, category))
+            input()
+        elif choice == '4':
+            list_movies = input("Enter a list of movies: ").split()
+            print("\n")
+            print("Average IMDB score of all movies:", average_imdb(list_movies))
+            input()
+        elif choice == '5':
+            category = input("Enter category to calculate average IMDB score: ")
+            print("Average IMDB score of category", category, ":", average_imdb_by_category(movies, category))
+            input()
+        elif choice == '6':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice")
+            input()
+
+if __name__ == "__main__":
+    main()
